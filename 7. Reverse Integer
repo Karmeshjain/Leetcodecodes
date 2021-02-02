@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int reverse(int x) 
+    {
+        long long rev=0,val=0;
+        val=abs(x);
+        while(val>0)
+        {
+        rev=rev*10+val%10;
+            if(rev > 2147483647 || rev < -2147483648)
+                return 0;
+            val=val/10;
+        }
+       rev=x>0?rev:-rev;
+        return rev;
+    }
+};
