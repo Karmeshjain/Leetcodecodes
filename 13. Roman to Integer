@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int romanToInt(string s) 
+    {
+       unordered_map<char, int> T = { { 'I' , 1 },
+                                   { 'V' , 5 },
+                                   { 'X' , 10 },
+                                   { 'L' , 50 },
+                                   { 'C' , 100 },
+                                   { 'D' , 500 },
+                                   { 'M' , 1000 } };
+        int roman=T[s.back()];
+     for(int j=s.length()-2;j>=0;--j)
+     {
+         
+                if(T[s[j+1]]>T[s[j]])
+             roman-=T[s[j]];
+         else
+              roman+=T[s[j]];
+            
+     }
+        return roman;
+        
+    }
+};
