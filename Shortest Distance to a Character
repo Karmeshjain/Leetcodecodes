@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<int> shortestToChar(string s, char c) 
+    {
+        int n=s.size();
+        vector<int>res(n,INT_MAX);
+        for(int i=0;i<n;i++){
+            if(s[i]==c){
+                res[i]=0;
+                for(int j=i-1,k=1;j>=0;j--,k++){
+                    if(k<res[j])res[j]=k;
+                    else break;
+                }
+                for(int j=i+1,k=1;j<n;j++,k++){
+                    if(k<res[j])res[j]=k;
+                    else break;
+                }
+            }
+        }
+        return res;
+    }
+};
