@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int removeElement(vector<int>& myvector, int val) 
+    {
+        for (auto it = myvector.begin(); it != myvector.end(); ++it)
+        {
+            if(*it==val)
+            { myvector.erase(it);
+             it--;}
+        }
+        return myvector.size();
+    }
+};
