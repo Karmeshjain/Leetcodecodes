@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int numberOfSteps (int num) 
+    {
+        int count=0;
+        for(int i=num;i!=0;count++)
+        {
+            if(i%2==0)
+                i=i/2;
+            else
+                i=i-1;
+        }
+        return count;
+    }
+};
