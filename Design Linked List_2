@@ -1,0 +1,174 @@
+class MyLinkedList {
+private:
+    struct Node
+    {
+        int val;
+        Node* next;
+        Node* prev;
+        Node(int Val):val(Val),next(NULL),prev(NULL) {}
+    };
+    Node* Head;
+    Node* Tail;
+public:
+    /** Initialize your data structure here. */
+    MyLinkedList() {
+        Head = NULL;
+        Tail = NULL;
+    }
+    int count = 0;
+    /** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
+    int get(int index) {
+        if(index < 0 || (index >= count))
+            return -1;
+        Node* tmp = Head;
+        int i = 0;
+        while(i < index)
+        {
+            tmp = tmp->next;
+            i++;
+        }
+        return tmp->val;
+    }
+    
+    /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
+    void addAtHead(int val) {
+        Node* NodeToAdd = new Node(val);
+        if(Head == NULL)
+        {
+            Head = NodeToAdd;
+            Tail = NodeToAdd;
+        }
+        else
+        {
+            NodeToAdd->next = Head;
+            Head->prev = NodeToAdd;
+            Head = NodeToAdd;  
+        }
+        count++;
+    }
+    
+    /** Append a node of value val to the last element of the linked list. */
+    void addAtTail(int val) {
+        Node* NodeToAdd = new Node(val);
+        if(Head == NULL)
+        {
+            Head = NodeToAdd;
+            Tail = NodeToAdd;
+        }
+        else
+        {
+            Tail->next = NodeToAdd;
+            NodeToAdd->prev = Tail;
+            NodeToAdd->next = NULL;
+            Tail = NodeToAdd;
+        }
+        count++;
+    }
+    
+    /** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */
+    void addAtIndex(int index, int val) {
+        if(index < 0 || (index > count))
+            return ;
+        Node* NodeToAdd = new Node(val);
+        Node* tmp = Head;
+        if(Head == NULL)
+        {
+            Head = NodeToAdd;
+            Tail = NodeToAdd;
+            count++;
+            return;
+        }
+
+        if(index == 0)
+        {
+            NodeToAdd->next = Head;
+            Head->prev = NodeToAdd;
+            Head = NodeToAdd;
+        }
+        else if(index == count)
+        {
+            Tail->next = NodeToAdd;
+            NodeToAdd->prev = Tail;
+            Tail = NodeToAdd;
+        }
+        else
+        {
+            int i = 0;
+            while(i < index-1)
+            {
+                tmp = tmp->next;
+                i++;
+            }
+            
+            Node* NodeToStore = tmp->next;
+            NodeToAdd->next = tmp->next; 
+            tmp->next = NodeToAdd;
+            NodeToAdd->prev = tmp;
+            NodeToStore->prev = NodeToAdd;
+        }      
+        
+        count++;
+    }
+    
+    /** Delete the index-th node in the linked list, if the index is valid. */
+    void deleteAtIndex(int index) {
+
+        if(Head == NULL)
+            return;
+        if(index < 0 || (index >= count))
+            return;
+        
+        Node* tmp = Head;
+        
+        if(index == 0)
+        {
+            if(Head == Tail)
+            {
+                delete Head;
+                Head = NULL;
+                Tail = NULL;
+            }
+            else
+            {
+                tmp = tmp->next;
+                delete Head;
+                tmp->prev = NULL;
+                Head = tmp;
+            }
+
+        }
+        else if(index == count-1)
+        {
+            tmp = Tail->prev;
+            delete Tail;
+            tmp->next = NULL;
+            Tail = tmp;
+        }
+        else
+        {
+            int i = 0;
+            while(i < index-1)
+            {
+                tmp = tmp->next;
+                i++;
+            }
+            
+            Node* NodeToDelete = tmp->next;
+            NodeToDelete->next->prev = tmp;
+            tmp->next = NodeToDelete->next;
+            
+            delete NodeToDelete;
+        }
+        count--;
+    }
+};
+
+/**
+ * Your MyLinkedList object will be instantiated and called as such:
+ * MyLinkedList* obj = new MyLinkedList();
+ * int param_1 = obj->get(index);
+ * obj->addAtHead(val);
+ * obj->addAtTail(val);
+ * obj->addAtIndex(index,val);
+ * obj->deleteAtIndex(index);
+ */
