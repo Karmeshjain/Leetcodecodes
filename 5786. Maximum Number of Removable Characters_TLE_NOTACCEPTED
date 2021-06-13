@@ -1,0 +1,25 @@
+class Solution {
+public:
+    bool isSubSeq(string s,string t)
+   {
+        int sLen = s.length(), sIdx = 0, tLen = t.length();
+    for (int i=0; i<tLen && sIdx<sLen; i++) 
+        if (t[i]==s[sIdx]) sIdx++;
+    return sIdx==sLen;
+   }
+    
+    int maximumRemovals(string s, string p, vector<int>& removable) 
+    {
+        int k=0;
+        for(int i=0;i<removable.size();i++)
+        {
+            s[removable[i]]='?';
+         if(!isSubSeq(p,s))
+             return k;
+            k+=1;
+        }
+        return k;
+        
+        
+    }
+};
