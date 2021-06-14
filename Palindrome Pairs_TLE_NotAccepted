@@ -1,0 +1,32 @@
+class Solution {
+public:
+    bool isPalindrome(string str)
+{
+    int l = 0;
+    int h = str.size() - 1;
+    while (h > l)
+    {
+        if (str[l++] != str[h--])
+            return false;
+    }
+    return true;
+}
+    vector<vector<int>> palindromePairs(vector<string>& words) 
+    {
+        vector<vector<int>> res;
+        for(int i=0;i<words.size();i++)
+        {
+           for(int j=i+1;j<words.size();j++)
+           {
+               string temp=words[i]+words[j];
+               if(isPalindrome(temp))
+                   res.push_back({i,j});
+               string temp2=words[j]+words[i];
+                     if(isPalindrome(temp2))
+                   res.push_back({j,i});
+               
+           }
+        }
+        return res;
+    }
+};
