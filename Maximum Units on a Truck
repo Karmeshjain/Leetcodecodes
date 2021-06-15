@@ -1,0 +1,30 @@
+class Solution {
+public:
+   
+    static bool sortcol( const vector<int>& v1,const vector<int>& v2 ) 
+    {
+    return v2[1] < v1[1]; 
+    }
+  
+    int maximumUnits(vector<vector<int>>& boxTypes, int truckSize) 
+    {
+        int units=0;
+          sort(boxTypes.begin(), boxTypes.end(),sortcol);
+          for(int i=0;i<boxTypes.size()&&truckSize!=0;i++)
+          {
+    
+              if(truckSize<boxTypes[i][0] || truckSize==boxTypes[i][0])
+              { 
+                  units+=truckSize*boxTypes[i][1];
+                  truckSize=0;
+              }
+              else
+              {
+                  units+=boxTypes[i][0]*boxTypes[i][1];
+                  truckSize-=boxTypes[i][0];
+              }
+          }
+        return units;
+        
+    }
+};
