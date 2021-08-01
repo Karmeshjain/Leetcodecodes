@@ -1,0 +1,15 @@
+   long long int i = 0;
+        long long int peri = 0;
+        long long int curr_apple = 0;
+        while(true)
+        {
+            long long int temp = 12*i*i;
+            curr_apple += temp;
+            if(curr_apple < neededApples) i++; 
+            else
+            {
+                peri = 8*i;
+                break;
+            }
+        }
+        return peri;
