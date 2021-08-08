@@ -1,0 +1,33 @@
+class Solution {
+public:
+    string reverseWords(string s) 
+    {
+        stack<string> st;
+        string a="";
+        for(int i=0;i<s.size();i++)
+        {
+                
+            if(s[i]==' ')
+            {
+                if(a!="")
+                    st.push(a);
+                a="";
+                continue;
+            }
+            else
+            a+=s[i];
+        }
+        if(a!="")
+            st.push(a);
+        string res;
+        while(!st.empty())
+        {
+            cout<<st.top()<<endl;
+            res+=st.top();
+            if(st.size()>1)
+            res+=" ";
+            st.pop();
+        }
+        return res;
+    }
+};
