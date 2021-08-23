@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int firstUniqChar(string s) 
+    {
+        unordered_map<char,int> mp1,mp2;
+        for(int i=0;i<s.length();i++)
+        {mp1[s[i]]+=1;
+         mp2[s[i]]=i;
+             }
+        stack<char> st;
+        for(auto i:mp1)
+        {
+            if(i.second==1)
+                st.push(i.first);
+        }
+        if(st.empty())
+            return -1;
+        char c=st.top();
+        return mp2[c];
+    }
+};
