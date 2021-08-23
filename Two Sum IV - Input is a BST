@@ -1,0 +1,36 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    unordered_set<int> s;
+    void fillmap(TreeNode* root)
+    {
+        if(!root)return;
+        s.insert(root->val);
+        fillmap(root->left);
+        fillmap(root->right);
+    }
+
+    bool findTarget(TreeNode* root, int k) 
+    {
+         fillmap(root);
+        if(s.size()==1)
+            return false;
+         for(auto i:s)
+         {
+             auto it=s.find(k-i);
+             if(it!=s.end()&&it!=s.find(i))
+                 return true;
+         }
+         return false;
+    }
+};
