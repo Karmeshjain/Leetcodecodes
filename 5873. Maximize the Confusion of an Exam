@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int ans=1;
+    int findLen(string& A, int n, int k, char ch)
+{
+    ans = 1;
+    int cnt = 0;
+    int l = 0, r = 0;
+    while (r < n) {
+     
+        if (A[r] != ch)
+            ++cnt;
+        while (cnt > k) {
+            if (A[l] != ch)
+                --cnt;
+            ++l;
+        }
+        ans = max(ans, r - l + 1);
+        ++r;
+    }
+    return ans;
+}
+    int answer(string& A, int n, int k)
+{
+        int ans = 1;
+        ans = max(ans, findLen(A, n, k, 'T'));
+        ans = max(ans, findLen(A, n, k, 'F'));
+        return ans;
+}
+    int maxConsecutiveAnswers(string answerKey, int k) 
+    {
+        return answer(answerKey,answerKey.size(),k);
+    }
+};
