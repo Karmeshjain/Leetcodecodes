@@ -1,0 +1,11 @@
+class Solution {
+public:
+    vector<int> singleNumber(vector<int>& nums) 
+    {
+        unordered_map<int,int> mp;
+        vector<int> res;
+        for(auto i:nums)  mp[i]++;
+        for(auto i:mp) if(mp[i.first]==1)res.push_back(i.first);
+        return res;
+    }
+};
