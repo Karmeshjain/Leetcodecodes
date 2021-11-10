@@ -1,0 +1,20 @@
+class Solution {
+public:
+    bool canConstruct(string ransomNote, string magazine) 
+    {
+        unordered_map<int,int> mp;
+        for(auto i:ransomNote)
+            mp[i]++;
+        for(auto i:magazine)
+           {
+               if(mp.find(i)!=mp.end() && mp[i]>0)
+               {
+                   mp[i]--;
+               }
+        }
+        for(auto i:mp)
+            if(i.second) return false;
+        return true;
+        
+    }
+};
