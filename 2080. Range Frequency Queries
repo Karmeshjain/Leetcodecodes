@@ -1,0 +1,42 @@
+class RangeFreqQuery {
+public:
+    unordered_map< int, vector<int> > store;
+    vector<int> temp;
+    RangeFreqQuery(vector<int>& arr) 
+    {
+        temp.resize(arr.size());
+        for(int i=0;i<arr.size();i++)
+            temp[i]=arr[i];
+       for (int i=0; i<arr.size(); ++i)
+        store[arr[i]].push_back(i); 
+    }
+    
+    int query(int left, int right, int element) {
+        if(left==right)
+        {
+            if(temp[left]==element)
+                return 1;
+            else
+                return 0;
+        }
+       
+         int a = lower_bound(store[element].begin(),
+                        store[element].end(),
+                        left)
+            - store[element].begin();
+ 
+  
+    int b = upper_bound(store[element].begin(),
+                        store[element].end(),
+                        right)
+            - store[element].begin();
+ 
+    return b-a;
+    }
+};
+
+/**
+ * Your RangeFreqQuery object will be instantiated and called as such:
+ * RangeFreqQuery* obj = new RangeFreqQuery(arr);
+ * int param_1 = obj->query(left,right,value);
+ */
