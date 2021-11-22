@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int wateringPlants(vector<int>& plants, int c) 
+    {
+        int res=0,mainc=c;
+        for(int i=0;i<plants.size();i++)
+        {
+          if(plants[i]>c)
+          {
+              c=mainc;
+              res=res+2*i+1;
+          }
+           else
+           res=res+1;
+          cout<<res<<"\n";
+          c-=plants[i];
+        }
+        return res;
+    }
+};
