@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<string> divideString(string s, int k, char fill) 
+    {
+        string temp="";
+        vector<string> ans;
+    for(int i=0;i<s.length();i++)
+    {
+        temp+=s[i];
+        if((i+1)%k==0)
+        {
+            ans.push_back(temp);
+            temp="";
+        }
+    }
+        if(temp!="")
+            ans.push_back(temp);
+        int n=ans.size();
+        while(ans[n-1].size()!=k)
+            ans[n-1].push_back(fill);
+        return ans;
+    }
+};
