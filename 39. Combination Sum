@@ -1,0 +1,31 @@
+class Solution {
+public:
+    vector<vector<int>> res;
+    void select(vector<int>& candidates,int target,vector<int> temp,int index)
+    {
+       if(target<=0 ||index==candidates.size())
+       {
+           if(target==0)
+           res.push_back(temp);
+               return;
+       }
+         select(candidates,target,temp,index+1);
+        temp.push_back(candidates[index]);
+          select(candidates,target-candidates[index],temp,index);
+        select(candidates,target-candidates[index],temp,index+1);
+    }  
+    bool twoVectorsAreEqual(vector<int> first_vec, vector<int> second_vec) {
+
+    sort(first_vec.begin(), first_vec.end());
+    sort(second_vec.begin(), second_vec.end());
+    return (first_vec == second_vec);
+}
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) 
+    {
+          select(candidates,target,{},0);
+        std::sort(res.begin(), res.end());
+res.erase(std::unique(res.begin(), res.end()), res.end());
+        return res;
+    }
+    
+};
