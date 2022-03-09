@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int dp[102];
+    int res(vector<int> nums,int i)
+    {
+        if(dp[i]!=-1) return dp[i];
+        if(i>=nums.size())
+            return 0;
+     int a=res(nums,i+2)+nums[i];
+     int b=res(nums,i+1);
+       return dp[i]=max(a,b);
+    }
+    int rob(vector<int>& nums) 
+    {
+     memset(dp,-1,sizeof(dp));
+     return res(nums,0);
+    }
+};
