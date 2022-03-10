@@ -1,0 +1,37 @@
+class Solution {
+public:
+    
+    
+    int dp[201][201];
+    
+    int recurs(vector<vector<int>>& tri,int i,int level)
+    {
+        if(level>=tri.size())
+        {
+            return 0;
+        }
+        
+        if(dp[level][i]!=INT_MIN)
+        {
+            return dp[level][i];
+
+        }
+        
+        return dp[level][i]=tri[level][i]+min(recurs(tri,i,level+1),recurs(tri,i+1,level+1));
+ 
+    }
+
+
+    int minimumTotal(vector<vector<int>>& tri) {
+       
+        for(int i=0;i<200;i++)
+        {
+            for(int j=0;j<200;j++)
+            {
+                dp[i][j]=INT_MIN;
+            }
+        }     
+        return recurs(tri,0,0);
+   
+    }
+};
