@@ -1,0 +1,18 @@
+class Solution {
+public:
+    bool isSubsequence(string s, string t) 
+    {
+        unordered_map<char,int> mp;
+        int j=0,i=0;
+        while(j<t.size())
+        {
+            if(s[i]==t[j++])
+            {
+                i++;
+            }
+        }
+        cout<<i;
+        return i==s.size();
+        
+    }
+};
