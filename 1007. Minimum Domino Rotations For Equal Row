@@ -1,0 +1,48 @@
+class Solution {
+public:
+    int minDominoRotations(vector<int>& tops, vector<int>& bottoms) 
+    {
+        unordered_map<int,int> mp;
+        for(int i=0;i<tops.size();i++)
+            mp[tops[i]]++;
+        int res=INT_MAX;
+        for(auto j:mp)
+        {
+            int ans=0,i;
+            for(i=0;i<tops.size();i++)
+            {
+                if(j.first==tops[i])
+                    continue;
+                else if(j.first==bottoms[i])
+                    ans++;
+                else
+                    break;
+            }
+            if(i==tops.size())
+            res=min(res,ans);
+        }
+        unordered_map<int,int> mp2;
+        for(int i=0;i<bottoms.size();i++)
+            mp2[bottoms[i]]++;
+        int res2=INT_MAX;
+        for(auto j:mp2)
+        {
+            int ans=0,i;
+            for(i=0;i<bottoms.size();i++)
+            {
+                if(j.first==bottoms[i])
+                    continue;
+                else if(j.first==tops[i])
+                    ans++;
+                else
+                    break;
+            }
+            if(i==bottoms.size())
+            res2=min(res2,ans);
+        }
+        if(res2==INT_MAX && res==INT_MAX)
+            return -1;
+        return min(res,res2);
+        
+    }
+};
