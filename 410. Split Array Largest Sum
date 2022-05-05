@@ -1,0 +1,35 @@
+class Solution {
+public:
+     bool isPossible(vector<int>& nums, int mid, int m){
+          int sa = 1;
+          int sum = 0;
+         for(int i=0; i<nums.size(); i++){
+             sum += nums[i];
+             if(sum > mid){
+                 sa++;
+                 sum = nums[i];
+             }
+         }    
+          return sa <= m;
+    }
+    
+    int splitArray(vector<int>& nums, int m) {
+        
+        int hi = accumulate(nums.begin(), nums.end(), 0);
+        int lo = *max_element(nums.begin(), nums.end());
+        
+        // edge cases
+        
+        if(m == nums.size()) return lo;
+        if(m == 1) return hi;
+        int ans = 0;
+        while(lo <= hi){
+            int mid = lo + (hi - lo) / 2;
+			
+            if(isPossible(nums, mid, m)) {  ans = mid;  hi = mid - 1; }            
+            else  lo = mid + 1;
+        }
+		
+        return ans;
+    }
+};
